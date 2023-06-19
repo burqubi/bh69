@@ -1,1 +1,1 @@
-print('xxzxxz')
+print()
