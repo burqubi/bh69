@@ -14,6 +14,20 @@ class ConfigParser:
     def __init__(self, text: str) -> None:
         self.data = self.loads(text)
 
+        @classmethod
+        def loads(cls, text: str) -> dict[str, dict[str, str]]:
+            lines = [line for line in text.split('\n') if line]
+            data = {}
+            current_section = ''
+            for line in lines:
+                if line.startswith('[') and line.endswith(']'):
+                    current_section = line[1:-1]
+                    data[current_section] = {}
+                else:
+                    key, value = line.split('=')
+                    data[current_section][key] = value
+            return data
+
     def has_section(self, section: str) -> bool:
         if section in data:
             True
