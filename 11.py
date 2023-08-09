@@ -1,24 +1,7 @@
-from pydantic import BaseModel
-
-class User(BaseModel):
-    title: str
-    description: int
-    count: str
-
-    @classmethod
-    def validate_title(cls, title):
-        if len(title) > 128:
-            raise ValueError("ValueError")
-        return title
-
-    @classmethod
-    def validate_descr(cls, description):
-        if len(description) > 4096:
-            raise ValueError("ValueError")
-        return description
-
-    @classmethod
-    def validate_count(cls, count):
-        if count == int:
-            True
-        return count
+from pydantic import BaseModel, Field, PositiveInt
+from pydantic.types import Decimal
+class ProductDetail(BaseModel):
+    title: str = Field(..., max_length=128)
+    descr: str = Field(..., max_length=4096)
+    price: Decimal = Field(..., max_digits=8, decimal_places=2)
+    count: PositiveInt
