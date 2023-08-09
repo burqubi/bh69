@@ -43,7 +43,7 @@ def load_names_to_db(objs: list):
         except:
             pass
 
-def class_new() -> list[Dates]:
-    with Dates.session as session:
-        objs = session.scalars(select(Dates))
-        return [Birthdays]
+# def class_new() -> list[Dates]:
+#     with Dates.session as session:
+#         objs = session.scalars(select(Dates))
+#         return [Birthdays]
