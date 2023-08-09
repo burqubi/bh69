@@ -25,16 +25,20 @@ class Birthdays(Base):
     date_id = Column(VARCHAR(64), ForeignKey('dates.id', onupdate='CASCADE'), nullable=False)
     date = relationship(Dates, back_populates='dates')
 
-# def update(new_date, new_events, new_description):
-#     Dates.date.__add__(new_date)
-#     Dates.events.__add__(new_events)
-#     Dates.description.__add__(new_description)
 
-def update(*values):
-    for i in range(len(values)):
-        new_date = values[0]
-        new_events = values[1]
-        new_description = values[2]
-        Dates.date.__add__(new_date)
-        Dates.events.__add__(new_events)
-        Dates.description.__add__(new_description)
+
+
+class Base(DeclarativeBase):
+    engine = create_engine(url='')
+    session = sessionmaker(bind=engine)
+
+from pydantic import BaseModel
+
+def load_names_to_db(objs: list):
+    objs = [Dates(**obj.date()) for obj in objs]
+    with Date.session as session:
+        session.add_all(objs)
+        try:
+            session.commit()
+        except:
+            pass
