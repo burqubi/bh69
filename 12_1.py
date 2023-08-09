@@ -30,7 +30,7 @@ class Birthdays(Base):
 #     Dates.events.__add__(new_events)
 #     Dates.description.__add__(new_description)
 
-def update(values):
+def update(*values):
     for i in range(len(values)):
         new_date = values[0]
         new_events = values[1]
