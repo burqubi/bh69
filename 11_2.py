@@ -3,7 +3,7 @@ from typing import Type, TypeVar
 from pydantic import BaseModel
 from io import TextIOWrapper
 class Parser(ABC):
-    schema: Type[BaseModel]
+    Schema: Type[BaseModel]
 
     @classmethod
     @abstractmethod
